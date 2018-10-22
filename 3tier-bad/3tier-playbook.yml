@@ -1,0 +1,22 @@
+---
+- name: deploy haproxy
+  hosts: frontends
+  become: true
+  roles:
+  - frontends
+
+
+- name: deploy tomcat
+  hosts: apps
+  become: true
+  roles:
+  - tomcat
+
+
+- name: deploy postgres
+  hosts: appdbs
+  become: true
+  vars:
+    postgresql_data_dir: /var/lib/pgsql/data
+  roles:
+  - postgres
